@@ -2,8 +2,9 @@
   
   var Bejeweled = root.Bejeweled = ( root.Bejeweled || {} );
   
-  var Jewel = Bejeweled.Jewel = function(image, pos) {
-    this.image = image;
+  var Jewel = Bejeweled.Jewel = function(id, pos) {
+    this.id = id;
+    this.image = imagesArray[this.id];
     this.pos = pos;
   }
   

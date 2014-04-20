@@ -4,7 +4,8 @@
   
   var Game = Bejeweled.Game = function(ctx) {
     this.ctx = ctx;
-    this.jewel = new Bejeweled.Jewel(img, [50,50]);
+    //this.jewel = new Bejeweled.Jewel(img, [100,100]);
+    this.board = new Bejeweled.Board();
   }
   
   Game.prototype.start = function() {
@@ -23,7 +24,8 @@
   
   Game.prototype.draw = function() {
     this.ctx.clearRect(0, 0, 600, 600);
-    this.jewel.draw(this.ctx);
+    //this.jewel.draw(this.ctx);
+    this.board.draw(this.ctx);
   }
   
 })(this);

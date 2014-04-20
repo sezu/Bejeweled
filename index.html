@@ -3,6 +3,7 @@
 <head>
     <title>Bejeweled</title>
     <script src="jewel.js"></script>
+    <script src="board.js"></script>
     <script src="game.js"></script>
 </head>
 <body>
@@ -13,12 +14,26 @@
       var ctx = canvas.getContext("2d")
       var img = new Image();
       
-      img.onload = function () {
-        var game = new Bejeweled.Game(ctx);
-        game.start();  
-      }
+      var loadedImagesCount = 0;
+      var imageNames = ["board.png", "jewel.png"];
+      var imagesArray = [];
+      
+      for(var i = 0; i < imageNames.length; i++) {
+        var image = new Image();
+        image.src = imageNames[i];
         
-      img.src = 'jewel.png';
+        image.onload = function() {
+          loadedImagesCount++;
+          
+          if (loadedImagesCount >= imageNames.length) {
+            var game = new Bejeweled.Game(ctx);
+            game.start();  
+          }
+        }
+        
+        imagesArray.push(image);
+      }
+      
     </script>
 </body>
 </html>
