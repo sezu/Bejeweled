@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bejeweled</title>
+    <script src="jewel.js"></script>
+    <script src="game.js"></script>
+</head>
+<body>
+    <canvas width="600" height="600"></canvas>
+    
+    <script>
+      var canvas = document.getElementsByTagName("canvas")[0];
+      var ctx = canvas.getContext("2d")
+      var img = new Image();
+      
+      img.onload = function () {
+        var game = new Bejeweled.Game(ctx);
+        game.start();  
+      }
+        
+      img.src = 'jewel.png';
+    </script>
+</body>
+</html>

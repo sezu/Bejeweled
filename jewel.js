@@ -1,0 +1,14 @@
+(function(root) {
+  
+  var Bejeweled = root.Bejeweled = ( root.Bejeweled || {} );
+  
+  var Jewel = Bejeweled.Jewel = function(image, pos) {
+    this.image = image;
+    this.pos = pos;
+  }
+  
+  Jewel.prototype.draw = function(ctx) {
+    ctx.drawImage(this.image, this.pos[0], this.pos[1])
+  }
+  
+})(this);
