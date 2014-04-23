@@ -9,8 +9,9 @@
     this.dropping = false;
   }
   
-  Game.prototype.start = function() {
+  Game.prototype.start = function(canvas) {
     var that = this;
+    canvas.addEventListener("mousedown", this.getInput.bind(this), false)
     
     this.intervalID = setInterval(function() {that.step() }, Game.FPS);
   }
@@ -23,8 +24,7 @@
     this.draw();
     
     if(this.playable) {
-      //get input
-      this.board.checkMatches();
+      this.playable = this.board.checkMatches();
       this.playable = false;
     } 
     else {
@@ -37,19 +37,28 @@
         this.dropping = this.board.dropJewels();
       }
     }
-    
-    //draw board
-    //get input and switch jewels
-    
-    //check for valid move/matches
-    //remove jewels, update score
-    //create new jewels for top row
-    //drop jewels/redraw until all jewels done dropping
   }
   
   Game.prototype.draw = function() {
     this.ctx.clearRect(0, 0, 600, 600);
     this.board.draw(this.ctx);
+  }
+  
+  Game.prototype.getInput = function(event) {
+    var x = Math.floor(event.x / 75)
+    var y = Math.floor(event.y / 75) + 1
+    
+    if(this.selectedPos) {
+      this.processInput(this.selectedPos, [x, y]);
+      this.selectedPos = null;
+    } else {
+      this.selectedPos = [x, y];
+    }
+  }
+  
+  Game.prototype.processInput = function(fromPos, toPos) {
+    this.board.moveJewels(fromPos, toPos);
+    this.playable = true;
   }
   
 })(this);

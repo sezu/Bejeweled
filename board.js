@@ -81,16 +81,20 @@
   }
   
   Board.prototype.checkMatches = function() {
-    //only check subsection of board
     this.checkHorizontal();
     this.checkVertical();
+    var count = 0
     
     for(var i = 0; i < this.board.length; i++) {
       for(var j = 1; j < this.board[i].length; j++) {
-        if(this.board[i][j].destroyable)
+        if(this.board[i][j].destroyable) {
           this.board[i][j] = null;
+          count++;
+        }
       }
     }
+    
+    return count;
   }
   
   //Check vertical or horizontal matches
@@ -120,5 +124,19 @@
            }    
       }
     }   
+  }
+  
+  Board.prototype.moveJewels = function(pos1, pos2) {
+    var posFrom = this.board[pos1[0]][pos1[1]].pos;
+    var posTo = this.board[pos2[0]][pos2[1]].pos;
+    
+    //change over attributes
+    var temp = this.board[pos1[0]][pos1[1]];
+    this.board[pos1[0]][pos1[1]] = this.board[pos2[0]][pos2[1]];
+    this.board[pos2[0]][pos2[1]] = temp;
+    
+    //maintain positions
+    this.board[pos1[0]][pos1[1]].pos = posFrom;
+    this.board[pos2[0]][pos2[1]].pos = posTo;
   }
 })(this);
