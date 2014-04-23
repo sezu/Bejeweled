@@ -6,7 +6,8 @@
     this.id = id;
     this.pos = pos;
     this.image = imagesArray[this.id];
-    this.falling = false
+    this.falling = false;
+    this.destroyed = false;
   }
   
   Jewel.prototype.draw = function(ctx) {
